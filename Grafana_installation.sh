@@ -2,6 +2,7 @@
 
 apt-get update
 wget https://dl.grafana.com/oss/release/grafana_5.4.3_amd64.deb
+apt-get install -y adduser libfontconfig
 dpkg -i grafana_5.4.3_amd64.deb 
 systemctl daemon-reload
 service grafana-server start
