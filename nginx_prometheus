@@ -119,4 +119,18 @@ Step 3: Open the url given below :
 
 curl http://localhost:9145/metrics
 
+# Prometheus configuration
+
+vim /etc/nginx/sites-available/nginx-prometheus.conf 
+systemctl restart nginx.service 
+vim /etc/prometheus/prometheus.yml
+
+- job_name: 'nginx'
+    # If prometheus-node-exporter is installed, grab stats about the local
+    # machine by default.
+    static_configs:
+      - targets: ['localhost:9145']
+
+systemctl restart prometheus
+systemctl status prometheus
 
