@@ -11,5 +11,5 @@ wget https://s3-eu-west-1.amazonaws.com/deb.robustperception.io/41EFC99D.gpg | a
 apt-get update
 apt-get install prometheus prometheus-node-exporter prometheus-pushgateway prometheus-alertmanager -y
 echo ""
-echo "for basic system monitoring,  I am using CPU Utilization Details (Cores) [ID: 4151] custom dashboard. Copy the dashboard ID from here. "
+echo "for basic system monitoring,  I am using CPU Utilization Details (Cores) [ID: 7039] custom dashboard. Copy the dashboard ID from here. "
 echo ""
