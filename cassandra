@@ -24,3 +24,9 @@ echo 'JVM_OPTS="$JVM_OPTS -javaagent:/opt/jolokia/jolokia-1.4.0/agents/jolokia-j
 nodetool flush
 nodetool drain
 service cassandra restart
+
+
+[[inputs.cassandra]]
+    context = "/jolokia/read"
+    servers = [":8778"]
+    metrics = ["/java.lang:type=Memory/HeapMemoryUsage"]
