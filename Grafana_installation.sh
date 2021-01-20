@@ -13,3 +13,10 @@ apt-get install prometheus prometheus-node-exporter prometheus-pushgateway prome
 echo ""
 echo "for basic system monitoring,  I am using CPU Utilization Details (Cores) [ID: 7039] custom dashboard. Copy the dashboard ID from here. "
 echo ""
+
+
+telegraf_plugins_extra:
+ mysql:
+  config:
+     - servers = 
+          ["root:1234567@tcp(localhost:3306)/"]
