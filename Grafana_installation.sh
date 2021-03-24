@@ -20,3 +20,10 @@ telegraf_plugins_extra:
   config:
      - servers = 
           ["root:1234567@tcp(localhost:3306)/"]
+          
+
+[agents:children]
+redis
+[all:vars]
+ansible_ssh_user=centos
+ansible_ssh_private_key_file=key.pem          
