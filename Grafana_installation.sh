@@ -2,9 +2,9 @@
 
 apt-get update
 cd /tmp
-wget https://dl.grafana.com/oss/release/grafana_5.4.3_amd64.deb
-apt-get install -y adduser libfontconfig
-dpkg -i grafana_5.4.3_amd64.deb 
+sudo apt-get install -y adduser libfontconfig1
+wget https://dl.grafana.com/oss/release/grafana_9.0.0_amd64.deb
+sudo dpkg -i grafana_9.0.0_amd64.deb
 systemctl daemon-reload
 service grafana-server start
 wget https://s3-eu-west-1.amazonaws.com/deb.robustperception.io/41EFC99D.gpg | apt-key add -
