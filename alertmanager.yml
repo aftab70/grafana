@@ -10,11 +10,11 @@ route:
 receivers:
 - name: 'email'
   email_configs:
-  - to: 'aftab70@ymail.com'
-    from: 'aftab70@outlook.com'
+  - to: 'example@example.com'
+    from: 'example@example.com'
     smarthost: smtp-mail.outlook.com:587
-    auth_username: 'aftab70@outlook.com'
-    auth_identity: 'example@outlook.com'
+    auth_username: 'example@example.com'
+    auth_identity: 'example@example.com'
     auth_password: 'PASSWORDHERE'
     send_resolved: true
 inhibit_rules:
@@ -28,7 +28,7 @@ inhibit_rules:
 ###########################################################################################################################
 global:
   resolve_timeout: 1m
-  slack_api_url: 'https://hooks.slack.com/services/key_here'
+  slack_api_url: 'SLACK-WEBHOOK-URL'
 
 route:
   receiver: 'slack-notifications'
