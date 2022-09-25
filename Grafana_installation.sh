@@ -19,7 +19,7 @@ telegraf_plugins_extra:
  mysql:
   config:
      - servers = 
-          ["root:1234567@tcp(localhost:3306)/"]
+          ["USERNAMEHERE:PASSWORDHERE@tcp(localhost:3306)/"]
           
 
 [agents:children]
