@@ -51,17 +51,17 @@ groups:
       summary: Host out of disk space (instance {{ $labels.instance }})
       description: "Disk is almost full (< 20% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-- name: HostSystemdServiceCrashed
-  rules: 
-  # systemd service crashed
-  - alert: HostSystemdServiceCrashed
-    expr: node_systemd_unit_state{state="failed"} == 1
-    for: 0m
-    labels:
-      severity: warning
-    annotations:
-      summary: Host systemd service crashed (instance {{ $labels.instance }})
-      description: "systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#- name: HostSystemdServiceCrashed
+#  rules: 
+#  # systemd service crashed
+#  - alert: HostSystemdServiceCrashed
+#    expr: node_systemd_unit_state{state="failed"} == 1
+#    for: 0m
+#    labels:
+#      severity: warning
+#    annotations:
+#      summary: Host systemd service crashed (instance {{ $labels.instance }})
+#      description: "systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
 
 - name: HostOutOfInodes
@@ -76,11 +76,11 @@ groups:
       summary: Host out of inodes (instance {{ $labels.instance }})
       description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-- name: HostApache2ProcessCrashed
+- name: HostApache2ServiceCrashed
   rules: 
   # Apache service crashed
-  - alert: HostApacheProcessCrashed
-    expr: node_systemd_unit_state{state="failed"} == 0
+  - alert: HostApacheServiceCrashed
+    expr: node_systemd_unit_state{instance="localhost:9100",job="node",name="apache2.service",state="active"}	== 0
     for: 0m
     labels:
       severity: critical
