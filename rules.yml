@@ -7,7 +7,19 @@ groups:
     expr: up == 0
     for: 1m
     labels:
-      severity: critial
+      severity: critical
     annotations:
       summary: "Instance {{ $labels.instance }} down"
       description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+
+- name: HostOutOfMemory
+  rules: 
+  # Alert for any instance that memory is filling up (< 20% left)
+  - alert: HostOutOfMemory
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 20
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host out of memory (instance {{ $labels.instance }})
+      description: "Node memory is filling up (< 20% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
