@@ -16,6 +16,7 @@ receivers:
     auth_username: 'aftab70@outlook.com'
     auth_identity: 'example@outlook.com'
     auth_password: 'PASSWORDHERE'
+    send_resolved: true
 inhibit_rules:
   - source_match:
       severity: 'critical'
