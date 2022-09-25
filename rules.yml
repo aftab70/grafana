@@ -76,3 +76,15 @@ groups:
       summary: Host out of inodes (instance {{ $labels.instance }})
       description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
+- name: HostApache2ProcessCrashed
+  rules: 
+  # Apache service crashed
+  - alert: HostApacheProcessCrashed
+    expr: node_systemd_unit_state{state="failed"} == 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host Apache2 process crashed (instance {{ $labels.instance }})
+      description: "Apache2 web serber systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
