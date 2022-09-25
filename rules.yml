@@ -50,3 +50,29 @@ groups:
     annotations:
       summary: Host out of disk space (instance {{ $labels.instance }})
       description: "Disk is almost full (< 20% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+- name: HostSystemdServiceCrashed
+  rules: 
+  # systemd service crashed
+  - alert: HostSystemdServiceCrashed
+    expr: node_systemd_unit_state{state="failed"} == 1
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host systemd service crashed (instance {{ $labels.instance }})
+      description: "systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+
+- name: HostOutOfInodes
+  rules: 
+  # Disk is almost running out of available inodes (< 10% left)
+  - alert: HostOutOfInodes
+    expr: node_filesystem_files_free{mountpoint ="/rootfs"} / node_filesystem_files{mountpoint="/rootfs"} * 100 < 10 and ON (instance, device, mountpoint) node_filesystem_readonly{mountpoint="/rootfs"} == 0
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host out of inodes (instance {{ $labels.instance }})
+      description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
