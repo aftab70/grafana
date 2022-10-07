@@ -76,6 +76,8 @@ groups:
       summary: Host out of inodes (instance {{ $labels.instance }})
       description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
+
+
 - name: HostApache2ServiceCrashed
   rules: 
   # Apache service crashed
@@ -87,4 +89,44 @@ groups:
     annotations:
       summary: Host Apache2 process crashed (instance {{ $labels.instance }})
       description: "Apache2 web serber systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      
+  - name: GrafanaServiceDown
+  rules: 
+  # Grafana service down.
+  - alert: GrafanaServiceDown
+    expr: node_systemd_unit_state{instance="localhost:9100",name="grafana-server.service",state="active"} == 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host Grafana service down on  (instance {{ $labels.instance }})
+      description: "Grafana service is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+
+
+
+- name: PushGatewayServiceDown
+  rules: 
+  # PushGateway service down.
+  - alert: GrafanaServiceDown
+    expr: node_systemd_unit_state{instance="localhost:9100",name="prometheus-pushgateway.service",state="active"} == 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host Push Gateway service down on  (instance {{ $labels.instance }})
+      description: "Prometheus Push Gateway service is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+
+- name: AlertmanagerIsDown
+  rules: 
+  # Alertmanager service down.
+  - alert: AlertmanagerIsDown
+    expr: node_systemd_unit_state{instance="localhost:9100",name="prometheus-alertmanager.service",state="active"} == 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host Alertmanager service down on  (instance {{ $labels.instance }})
+      description: "Prometheus Alertmanager service is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"    
 
